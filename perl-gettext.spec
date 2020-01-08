@@ -4,13 +4,13 @@
 #
 Name     : perl-gettext
 Version  : 1.07
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/P/PV/PVANDRY/gettext-1.07.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PV/PVANDRY/gettext-1.07.tar.gz
 Summary  : 'Perl bindings for POSIX i18n gettext functions'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
-Requires: perl-gettext-lib = %{version}-%{release}
+Requires: perl-gettext-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -23,29 +23,31 @@ work just like the C versions.
 %package dev
 Summary: dev components for the perl-gettext package.
 Group: Development
-Requires: perl-gettext-lib = %{version}-%{release}
 Provides: perl-gettext-devel = %{version}-%{release}
+Requires: perl-gettext = %{version}-%{release}
 
 %description dev
 dev components for the perl-gettext package.
 
 
-%package lib
-Summary: lib components for the perl-gettext package.
-Group: Libraries
+%package perl
+Summary: perl components for the perl-gettext package.
+Group: Default
+Requires: perl-gettext = %{version}-%{release}
 
-%description lib
-lib components for the perl-gettext package.
+%description perl
+perl components for the perl-gettext package.
 
 
 %prep
 %setup -q -n Locale-gettext-1.07
+cd %{_builddir}/Locale-gettext-1.07
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -55,7 +57,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -75,12 +77,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/Locale/gettext.pm
 
 %files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Locale::gettext.3
 
-%files lib
+%files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/Locale/gettext/gettext.so
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/Locale/gettext.pm
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/auto/Locale/gettext/gettext.so
