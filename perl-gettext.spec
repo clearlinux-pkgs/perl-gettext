@@ -4,7 +4,7 @@
 #
 Name     : perl-gettext
 Version  : 1.07
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/P/PV/PVANDRY/gettext-1.07.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PV/PVANDRY/gettext-1.07.tar.gz
 Summary  : 'Perl bindings for POSIX i18n gettext functions'
@@ -84,5 +84,5 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/Locale/gettext.pm
-/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/auto/Locale/gettext/gettext.so
+/usr/lib/perl5/vendor_perl/5.30.2/x86_64-linux-thread-multi/Locale/gettext.pm
+/usr/lib/perl5/vendor_perl/5.30.2/x86_64-linux-thread-multi/auto/Locale/gettext/gettext.so
